@@ -12,7 +12,8 @@ The comands *queryEvolutionChain* receives an parameter that identify the ID of 
 
 Returns the information (Name, Base Stats, Height, Weight, Id) of the every pokemon belong to evolution chain. And print a console tree with the name of pokemons in the line of evolution.
 
-`Name:  horsea
+```
+Name:  horsea
 Bases stats: 
         speed :  60
         special-defense :  25
@@ -48,4 +49,5 @@ Id:  230
 
 horsea
  |->seadra
-        |->kingdra`
+        |->kingdra
+```
