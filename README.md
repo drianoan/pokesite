@@ -1,2 +1,2 @@
 # pokesite
-A basic librarie to query pokemon info
+A basic library to query pokemon info
