@@ -61,9 +61,7 @@ def pokemon_list(request):
                             evo_text = ""
                             #When doesnt have previous evolution is a root evolution
                             if evo["evolves_from_species_id"] == '':
-                                evo_text = "root evolution"
-                                # Stores actual id for next comparison
-                                evolution_flag = evo["id"]
+                                evo_text = "root evolution" 
                             else:
                                 # Evaluate if current pokemon evolves from searched pokemon  
                                 # or if id from searched pokemon are lower that current id (principle of evolution id are bigger)
