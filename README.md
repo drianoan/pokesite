@@ -8,7 +8,7 @@ The project have two simply operations to use queries from an api ([pokeApi](htt
 ----------
 The comands *queryEvolutionChain* receives an parameter that identify the ID of a evolution chain of a groups of pokemon. 
 
- `python3 manage.py queryEvolutionChain 13`
+ `python3 manage.py queryEvolutionChain 54`
 
 Returns the information (Name, Base Stats, Height, Weight, Id) of the every pokemon belong to evolution chain. And print a console tree with the name of pokemons in the line of evolution.
 
@@ -56,16 +56,13 @@ horsea
 ### Using WebService
 ----------
 
-The web service expose two url`s for CRUD operation of  the information of *pokemon* and *pokemon_species* tables of a Mysql database.  
+The web service expose an api to query a mysql database. The first operation API query with a pokemon name parameter the information of the pokemon and all chain evolution.
 
-`curl -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/pokemon/`
+`curl -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/api/pokemon?name=bulbasaur`
 
 ```
 {
-    "count": 964,
-    "next": "http://127.0.0.1:8000/pokemon/?page=2",
-    "previous": null,
-    "results": [
+    "pokemon": [
         {
             "id": 1,
             "identifier": "bulbasaur",
@@ -75,7 +72,9 @@ The web service expose two url`s for CRUD operation of  the information of *poke
             "base_experience": 64,
             "order": 1,
             "is_default": 1
-        },
+        }
+    ],
+    "evolution": [
         {
             "id": 2,
             "identifier": "ivysaur",
@@ -84,7 +83,8 @@ The web service expose two url`s for CRUD operation of  the information of *poke
             "weight": 130,
             "base_experience": 142,
             "order": 2,
-            "is_default": 1
+            "is_default": 1,
+            "evolution_type": "evolution"
         },
         {
             "id": 3,
@@ -94,83 +94,16 @@ The web service expose two url`s for CRUD operation of  the information of *poke
             "weight": 1000,
             "base_experience": 236,
             "order": 3,
-            "is_default": 1
-        },
-        {
-            "id": 4,
-            "identifier": "charmander",
-            "species_id": 4,
-            "height": 6,
-            "weight": 85,
-            "base_experience": 62,
-            "order": 5,
-            "is_default": 1
-        },
-        {
-            "id": 5,
-            "identifier": "charmeleon",
-            "species_id": 5,
-            "height": 11,
-            "weight": 190,
-            "base_experience": 142,
-            "order": 6,
-            "is_default": 1
-        },
-        {
-            "id": 6,
-            "identifier": "charizard",
-            "species_id": 6,
-            "height": 17,
-            "weight": 905,
-            "base_experience": 240,
-            "order": 7,
-            "is_default": 1
-        },
-        {
-            "id": 7,
-            "identifier": "squirtle",
-            "species_id": 7,
-            "height": 5,
-            "weight": 90,
-            "base_experience": 63,
-            "order": 10,
-            "is_default": 1
-        },
-        {
-            "id": 8,
-            "identifier": "wartortle",
-            "species_id": 8,
-            "height": 10,
-            "weight": 225,
-            "base_experience": 142,
-            "order": 11,
-            "is_default": 1
-        },
-        {
-            "id": 9,
-            "identifier": "blastoise",
-            "species_id": 9,
-            "height": 16,
-            "weight": 855,
-            "base_experience": 239,
-            "order": 12,
-            "is_default": 1
-        },
-        {
-            "id": 10,
-            "identifier": "caterpie",
-            "species_id": 10,
-            "height": 3,
-            "weight": 29,
-            "base_experience": 39,
-            "order": 14,
-            "is_default": 1
+            "is_default": 1,
+            "evolution_type": "evolution"
         }
     ]
 }
 ```
 
-`curl -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/pokemon/254/`
+The second operation search a pokemon with the id of the pokemon
+
+`curl -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/api/pokemon/254`
 
 ```
 {
@@ -182,30 +115,5 @@ The web service expose two url`s for CRUD operation of  the information of *poke
     "base_experience": 239,
     "order": 333,
     "is_default": 1
-}
-```
-
-`curl -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/pokemon_species/254/`
-
-```
-{
-    "id": 254,
-    "identifier": "sceptile",
-    "generation_id": 3,
-    "evolves_from_species_id": "253",
-    "evolution_chain_id": 130,
-    "color_id": 5,
-    "shape_id": 6,
-    "habitat_id": 2,
-    "gender_rate": 1,
-    "capture_rate": 45,
-    "base_happiness": 70,
-    "is_baby": 0,
-    "hatch_counter": 20,
-    "has_gender_differences": 0,
-    "growth_rate_id": 4,
-    "forms_switchable": 1,
-    "order": 279,
-    "conquest_order": "132"
 }
 ```
