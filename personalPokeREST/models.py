@@ -36,7 +36,7 @@ class pokemon_species (models.Model):
     evolution_chain_id = models.IntegerField(blank=True,null=True)
     color_id = models.IntegerField(blank=True,null=True)
     shape_id = models.IntegerField(blank=True,null=True)
-    habitat_id = models.IntegerField(blank=True,null=True)
+    habitat_id = models.CharField(blank=True,null=True,max_length=200)
     gender_rate = models.IntegerField(blank=True,null=True)
     capture_rate = models.IntegerField(blank=True,null=True)
     base_happiness = models.IntegerField(blank=True,null=True)
